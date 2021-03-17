@@ -1,29 +1,89 @@
 package net.codejava;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Driver {
+	
+	private String _dbUrl = "jdbc:mysql://localhost:3306/piazza";
+	private String _dbUserName = "root";
+	private String _dbPassword = "12345678";
+	
 
-	public static void main(String[] args) {
+	private Connection _conn;
+	private ResultSet _result;
+	private Statement _statement;
+		
+	// This will be changed into an enum
+	public static int UserTableName = 0;  
+	
+	// Singleton instance
+	private static Driver instance;
+	
+	private Driver() {}
+	
+	public static Driver getInstance() {
+		if(instance == null)
+		{
+			instance = new Driver();
+		}
+		return instance;
+	}
+ 
+	// Change return into list/or class
+	public String getSingleColElement(int tableNameEnum, String colName, String attributeToSearch, String specificSearchword)
+	{
 		try 
 		{
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/piazza", "root", "12345678");
-			
-			Statement statement = conn.createStatement();
-			
-			ResultSet result = statement.executeQuery("SELECT * FROM colorcode;");
-			System.out.println("test");
-			
-			while(result.next()) {
-				System.out.println(result.getString(1) + ", " + result.getString(2));
+			_conn = DriverManager.getConnection(_dbUrl, _dbUserName, _dbPassword);
+
+				
+			_statement = _conn.createStatement();
+			String tableName = "";
+			if(tableNameEnum == UserTableName)
+			{
+				tableName = "users";
 			}
 			
-		}
-		catch(Exception e)
-		{
+			String sqlQuery = "SELECT " + colName + " FROM " + tableName + " WHERE " + attributeToSearch + " = \""+ specificSearchword + "\";";
+			System.out.println("SQL query: " + sqlQuery);
 			
-		}
+			_result = _statement.executeQuery(sqlQuery);
+			
+			String resultStr = "";			
+			
+			while(_result.next()) {
+				resultStr += _result.getString(1);
+			}
+			
+			//System.out.println("Result: " + resultStr);
+			
+			return resultStr;
+			
+	    } catch (Exception e) {
+            System.err.println("[DRIVER]: " + e.getStackTrace());
+	    } finally {
+	        close();
+	    }
+		return null;
 	}
+	
+    private void close() {
+        try {
+            if (_result != null) {
+            	_result.close();
+            }
+
+            if (_statement != null) {
+                _statement.close();
+            }
+
+            if (_conn != null) {
+                _conn.close();
+            }
+        } catch (Exception e) {
+            System.err.println("[DRIVER]: " + e.getStackTrace());
+        }
+    }
 }
+
+
