@@ -29,16 +29,14 @@ public class Driver {
 		return instance;
 	}
  
-	// Change return into list/or class
+	// Expects to only receive one row from the table as a result, will return element from the last row if multiple is received. 
 	public String getSingleColElement(int tableNameEnum, String colName, String attributeToSearch, String specificSearchword)
 	{
 		try 
 		{
-			_conn = DriverManager.getConnection(_dbUrl, _dbUserName, _dbPassword);
 
-				
-			_statement = _conn.createStatement();
 			String tableName = "";
+			
 			if(tableNameEnum == UserTableName)
 			{
 				tableName = "users";
@@ -46,16 +44,13 @@ public class Driver {
 			
 			String sqlQuery = "SELECT " + colName + " FROM " + tableName + " WHERE " + attributeToSearch + " = \""+ specificSearchword + "\";";
 			System.out.println("SQL query: " + sqlQuery);
-			
-			_result = _statement.executeQuery(sqlQuery);
+
+			_result = queryDatabase(sqlQuery);
 			
 			String resultStr = "";			
-			
 			while(_result.next()) {
-				resultStr += _result.getString(1);
+				resultStr = _result.getString(1);
 			}
-			
-			//System.out.println("Result: " + resultStr);
 			
 			return resultStr;
 			
@@ -67,6 +62,23 @@ public class Driver {
 		return null;
 	}
 	
+	private ResultSet queryDatabase(String sqlQuery) {
+		// TODO Auto-generated method stub
+		
+		try {
+			_conn = DriverManager.getConnection(_dbUrl, _dbUserName, _dbPassword);
+			
+			_statement = _conn.createStatement();
+			
+			_result = _statement.executeQuery(sqlQuery);
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return _result;
+	}
+
     private void close() {
         try {
             if (_result != null) {

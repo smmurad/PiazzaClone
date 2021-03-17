@@ -20,7 +20,5 @@ public class DatabaseAPI {
 		String password = Driver.getInstance().getSingleColElement(Driver.UserTableName, "password", "email", username);
 		
 		return password.equals(passwordToVerify);
-		
 	}
-
 }

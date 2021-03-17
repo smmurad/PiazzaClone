@@ -18,6 +18,7 @@ public class UIManager {
 	}
 	
 	public static void main(String[] args) {
+		
 		if(isTextbased)
 		{
 			getInstance().startTextbasedLogin();
