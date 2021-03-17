@@ -78,6 +78,38 @@ public class Driver {
 		
 		return _result;
 	}
+	
+	public String PostToTable(int tableNameEnum, String post)
+	{
+		try 
+		{
+
+			String tableName = "";
+			
+			if(tableNameEnum == UserTableName)
+			{
+				tableName = "post";
+			}
+			
+			String sqlQuery = "INSERT INTO " + tableName + " VALUES(" + post + ");";
+			System.out.println("SQL query: " + sqlQuery);
+
+			_result = queryDatabase(sqlQuery);
+			
+			String resultStr = "";			
+			while(_result.next()) {
+				resultStr = _result.getString(1);
+			}
+			
+			return resultStr;
+			
+	    } catch (Exception e) {
+            System.err.println("[DRIVER]: " + e.getStackTrace());
+	    } finally {
+	        close();
+	    }
+		return null;
+	}
 
     private void close() {
         try {
