@@ -1,11 +1,9 @@
 package net.codejava;
 
+// This class is only for the current user using the system. 
 public class UserHandler {
 	
 	private boolean isLoggedIn = false;
-	
-	//Is this at the right place?
-	private boolean folderExists = false;
 
 	// Singleton instance
 	private static UserHandler instance;
@@ -40,20 +38,10 @@ public class UserHandler {
 	{
 		isLoggedIn = false;
 	}
-	
-	//Is this supposed to be here or somewhere else? Change this function anyway
-	public boolean Post(String postText)
+
+	public int GetUniqueID() 
 	{
-		String bob = "Bob"; //Dummy variable for testing
-		//change "1 == 1" to something like "check if the folder exists", something a la (DatabaseAPI.getInstance().VerifyPassword(userName, Password))
-		if(bob == "Bob")
-		{
-			folderExists = true;
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		System.out.println("Get Unique UserID not yet implemented");
+		return 0;
 	}
 }
