@@ -1,9 +1,9 @@
 package net.codejava;
 
-// This class handles all imput
+// This class handles all input
 public class UIManager {
 	
-	static boolean isTextbased = true;
+	static boolean isTextbased = false;
 	
 	// Singleton instance
 	private static UIManager instance;
@@ -27,7 +27,8 @@ public class UIManager {
 		}
 		else
 		{
-			
+			getInstance().startGuiLogin();
+			getInstance().startGuiAddPost();
 		}
 	}
 
@@ -57,6 +58,11 @@ public class UIManager {
 		
 	}
 	
+	private boolean startGuiLogin() {
+		net.Gui.LogIn.runLogin(null);
+		return true;
+	}
+	
 	private void startAddPost() {
 		try
 		{
@@ -73,6 +79,11 @@ public class UIManager {
 		{
             System.err.println("[UIManager] Exeption: " + e.getMessage());
 		}
+	}
+	
+	private boolean startGuiAddPost() {
+		net.Gui.AddPost.runAddPost(null);
+		return true;
 	}
 	
 }
