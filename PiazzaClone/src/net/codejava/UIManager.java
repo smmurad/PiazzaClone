@@ -5,7 +5,7 @@ import java.util.List;
 // This class handles all input
 public class UIManager {
 	
-	static boolean isTextbased = true;
+	static boolean isTextbased = false;
 	
 	// Singleton instance
 	private static UIManager instance;
@@ -24,14 +24,15 @@ public class UIManager {
 		
 		if(isTextbased)
 		{
-			//getInstance().startTextbasedLogin();
-			//getInstance().startAddPost();
+			getInstance().startTextbasedLogin();
+			getInstance().startAddPost();
 			getInstance().startSearchForPostContent();
 		}
 		else
 		{
-			getInstance().startGuiLogin();
-			getInstance().startGuiAddPost();
+			//getInstance().startGuiLogin();
+			//getInstance().startGuiAddPost();
+			getInstance().startRunSearchForWord();
 		}
 		System.out.println("-----------Program ended-------------");
 	}
@@ -111,6 +112,11 @@ public class UIManager {
 	
 	private boolean startGuiAddPost() {
 		net.Gui.AddPost.runAddPost(null);
+		return true;
+	}
+	
+	private boolean startRunSearchForWord() {
+		net.Gui.SearchForWord.runSearchForWord(null);
 		return true;
 	}
 	
