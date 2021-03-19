@@ -2,10 +2,10 @@ package net.codejava;
 
 import java.util.List;
 
-// This class handles all imput
+// This class handles all input
 public class UIManager {
 	
-	static boolean isTextbased = false;
+	static boolean isTextbased = true;
 	
 	// Singleton instance
 	private static UIManager instance;
@@ -24,25 +24,33 @@ public class UIManager {
 		
 		if(isTextbased)
 		{
-			getInstance().startTextbasedLogin();
-			getInstance().startAddPost();
+			//getInstance().startTextbasedLogin();
+			//getInstance().startAddPost();
+			getInstance().startSearchForPostContent();
 		}
 		else
 		{
 			getInstance().startGuiLogin();
 			getInstance().startGuiAddPost();
 		}
+		System.out.println("-----------Program ended-------------");
 	}
 
 	private void startSearchForPostContent() {
-		// TODO Auto-generated method stub
 		try {
 			String searchword = InputHandler.getStringInput("Type in searchword:");
 			List<Integer> ids = PostManager.getInstance().SearchForPost(searchword);
 			//for loop view results
-			for (int id:ids) {
-				System.out.println(id);
+			if(ids.isEmpty())
+			{
+				System.out.println("No post containing searchword: " + searchword + " ...\n\n");
+				return;
 			}
+			System.out.println("Found "  + ids.size() + " matching rows with searchword: "  + searchword + "\n");
+			for (int id:ids) {
+				System.out.println("postID: " + id);
+			}
+
 		}
 		
 		catch(Exception e)
