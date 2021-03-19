@@ -1,5 +1,7 @@
 package net.codejava;
 
+import java.util.*;
+
 import net.DBResults.Post;
 import net.DBResults.TableEnum;
 
@@ -60,6 +62,11 @@ public class DatabaseAPI {
 		
 		Driver.getInstance().InsertIntoTable(TableEnum.post, values);
 		
+	}
+
+	public List<Integer> getAllElementsContainingSearchword(TableEnum post, String ColumnName, String searchText,  String specificSearchword) {
+		// TODO Auto-generated method stub
+		return Driver.getInstance().getAllElementsContainingSearchword(post, ColumnName, searchText, specificSearchword);
 	}
 	
 }

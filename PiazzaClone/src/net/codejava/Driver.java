@@ -1,6 +1,7 @@
 package net.codejava;
 
 import java.sql.*;
+import java.util.*;
 
 import net.DBResults.TableEnum;
 
@@ -131,6 +132,37 @@ public class Driver {
 			return "";
 		}
 	}
+	
+	public List<Integer> getAllElementsContainingSearchword(TableEnum tableNameEnum, String colName, String postText, String specificSearchword)
+	{
+		try 
+		{
+
+			String tableName = "";
+			List<Integer> list = new ArrayList<Integer>();
+			
+			tableName = getTableName(tableNameEnum);
+			
+			String sqlQuery = "SELECT " + colName + " FROM " + tableName + " WHERE " + postText + " LIKE \"" + "%" + specificSearchword + "%\";";
+			System.out.println("SQL query: " + sqlQuery);
+
+			_result = queryDatabase(sqlQuery);
+			
+			//List of all IDs			
+			while(_result.next()) {
+				int number = Integer.parseInt(_result.getString(1));
+				list.add(number);
+			}
+			
+			return list;
+			
+	    } catch (Exception e) {
+            System.err.println("[DRIVER]: " + e.getStackTrace());
+	    } finally {
+	        close();
+	    }
+		return null;
+	}
 
     private void close() {
         try {
@@ -149,6 +181,7 @@ public class Driver {
             System.err.println("[DRIVER]: " + e.getStackTrace());
         }
     }
+    
 }
 
 

@@ -1,10 +1,12 @@
 package net.codejava;
 
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.sql.Timestamp;
 
 import net.DBResults.Post;
 import net.DBResults.PostType;
+import net.DBResults.TableEnum;
 
 
 
@@ -85,4 +87,8 @@ public class PostManager {
 		return -1;
 	}
 	
+	public List<Integer> SearchForPost(String searchText) {
+		
+		return DatabaseAPI.getInstance().getAllElementsContainingSearchword(TableEnum.post, "postID", "text", searchText);
+	}
 }

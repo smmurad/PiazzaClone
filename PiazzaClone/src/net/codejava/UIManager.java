@@ -1,5 +1,7 @@
 package net.codejava;
 
+import java.util.List;
+
 // This class handles all imput
 public class UIManager {
 	
@@ -22,13 +24,32 @@ public class UIManager {
 		
 		if(isTextbased)
 		{
-			getInstance().startTextbasedLogin();
-			getInstance().startAddPost();
+			//getInstance().startTextbasedLogin();
+			//getInstance().startAddPost();
+			getInstance().startSearchForPostContent();
 		}
 		else
 		{
 			
 		}
+	}
+
+	private void startSearchForPostContent() {
+		// TODO Auto-generated method stub
+		try {
+			String searchword = InputHandler.getStringInput("Type in searchword:");
+			List<Integer> ids = PostManager.getInstance().SearchForPost(searchword);
+			//for loop view results
+			for (int id:ids) {
+				System.out.println(id);
+			}
+		}
+		
+		catch(Exception e)
+		{
+            System.err.println("[UIManager] Input Exception");
+		}
+		
 	}
 
 	private boolean startTextbasedLogin() {
