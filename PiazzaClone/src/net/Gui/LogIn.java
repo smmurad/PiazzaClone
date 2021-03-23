@@ -26,6 +26,7 @@ public class LogIn extends JFrame {
 	private JPanel contentPane;
 	private JTextField LoginField;
 	private JTextField PassworField;
+	private JButton btnMenu;
 
 	/**
 	 * Launch the application.
@@ -82,6 +83,10 @@ public class LogIn extends JFrame {
 		btnLogin.setBounds(114, 157, 117, 29);
 		contentPane.add(btnLogin);
 		
+		btnMenu = new JButton("Back to menu");
+		btnMenu.setBounds(114, 204, 117, 29);
+		contentPane.add(btnMenu);
+		
 		setTitle("Logg inn");
 		
 		
@@ -109,6 +114,20 @@ public class LogIn extends JFrame {
 				}
 				
 				
+			}
+		});
+		
+		btnMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				try
+				{
+					net.Gui.Navigate.runNavigate(null);
+				}
+				catch(Exception e)
+				{
+		            System.err.println("[UIManager] Input Exception");
+				}
 			}
 		});
 		

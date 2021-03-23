@@ -21,6 +21,7 @@ public class reply extends JFrame {
 	private JPanel contentPane;
 	private JTextField postID;
 	private JButton btnReplyPost;
+	private JButton btnMenu;
 
 	/**
 	 * Launch the application.
@@ -65,8 +66,12 @@ public class reply extends JFrame {
 		contentPane.add(replyText);
 		
 		btnReplyPost = new JButton("Post");
-		btnReplyPost.setBounds(155, 219, 117, 29);
+		btnReplyPost.setBounds(180, 207, 117, 29);
 		contentPane.add(btnReplyPost);
+		
+		btnMenu = new JButton("Back to menu");
+		btnMenu.setBounds(180, 237, 117, 29);
+		contentPane.add(btnMenu);
 		
 		
 		
@@ -88,8 +93,21 @@ public class reply extends JFrame {
 				{
 		            System.err.println("[UIManager] Exeption: " + e.getMessage());
 				}
+			}
+		});
+		
+		
+		btnMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
 				
-				
+				try
+				{
+					net.Gui.Navigate.runNavigate(null);
+				}
+				catch(Exception e)
+				{
+		            System.err.println("[UIManager] Input Exception");
+				}
 			}
 		});
 	}

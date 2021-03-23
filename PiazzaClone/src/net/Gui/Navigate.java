@@ -48,7 +48,7 @@ public class Navigate extends JFrame {
 		btnLogin.setBounds(143, 45, 117, 29);
 		contentPane.add(btnLogin);
 		
-		JButton btnAddQuestion = new JButton("AddQuestion");
+		JButton btnAddQuestion = new JButton("Add question");
 		btnAddQuestion.setBounds(143, 86, 117, 29);
 		contentPane.add(btnAddQuestion);
 		
@@ -61,7 +61,7 @@ public class Navigate extends JFrame {
 		contentPane.add(btnReply);
 		
 		JButton btnSearch = new JButton("Search in posts");
-		btnSearch.setBounds(143, 174, 117, 29);
+		btnSearch.setBounds(125, 168, 157, 29);
 		contentPane.add(btnSearch);
 		
 		
