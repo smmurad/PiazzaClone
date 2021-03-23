@@ -63,6 +63,41 @@ public class PostManager {
 		
 	}
 	
+	
+public boolean AddReplyPost(String postID, String postText) {
+		
+		try
+		{
+			
+			Timestamp sqlDate = new Timestamp(System.currentTimeMillis());
+			
+			
+			String postTitle = "";
+			// Create a new post
+			Post newPost = new Post(postTitle, postText, PostType.answer, sqlDate);
+			
+			// Fill it up
+			newPost.createdBy = UserHandler.getInstance().GetUniqueID();
+			int replyIDint = getUniqueID();
+			newPost.postID = replyIDint;
+			newPost.colorID = PostManager.GetColor(newPost.postType);
+			String replyID = String.valueOf(replyIDint);
+			
+			// Try to add it to the Database
+			System.out.println(postID + " \t " + replyID);
+			
+			DatabaseAPI.getInstance().CreateNewPost(newPost);
+			DatabaseAPI.getInstance().CreateRelationBetweeenPosts(postID, replyID);
+			return true;
+		}
+		catch (Exception e)
+		{
+			System.err.println("[PostManager] Exeption: " + e.getMessage());
+			return false;
+		}
+		
+	}
+	
 	// TODO Should be changed to something that actually checks the db
 	private static int getUniqueID() {
 		return ThreadLocalRandom.current().nextInt(0, 1000000000);

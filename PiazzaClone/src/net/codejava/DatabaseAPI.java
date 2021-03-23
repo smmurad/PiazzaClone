@@ -63,6 +63,14 @@ public class DatabaseAPI {
 		Driver.getInstance().InsertIntoTable(TableEnum.post, values);
 		
 	}
+	
+	public void CreateRelationBetweeenPosts(String postID, String replyID) {
+		String values = "";
+		values += postID;
+		values += ",";
+		values += replyID;
+		Driver.getInstance().InsertIntoTable(TableEnum.relationbetweenposts, values);
+	}
 
 	public List<Integer> getAllElementsContainingSearchword(TableEnum post, String ColumnName, String searchText,  String specificSearchword) {
 		// TODO Auto-generated method stub

@@ -32,7 +32,9 @@ public class UIManager {
 		{
 			//getInstance().startGuiLogin();
 			//getInstance().startGuiAddPost();
-			getInstance().startRunSearchForWord();
+			//getInstance().startRunSearchForWord();
+			getInstance().startReplyToPost();
+			//DatabaseAPI.getInstance().CreateRelationBetweeenPosts("534315974","616938363");
 		}
 		System.out.println("-----------Program ended-------------");
 	}
@@ -117,6 +119,11 @@ public class UIManager {
 	
 	private boolean startRunSearchForWord() {
 		net.Gui.SearchForWord.runSearchForWord(null);
+		return true;
+	}
+	
+	private boolean startReplyToPost() {
+		net.Gui.reply.runReply(null);
 		return true;
 	}
 	
