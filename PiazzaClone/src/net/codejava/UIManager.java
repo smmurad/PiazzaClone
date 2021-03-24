@@ -3,11 +3,13 @@ package net.codejava;
 import java.util.List;
 
 import net.DBResults.UserStats;
+import net.DBResults.TableEnum;
+
 
 // This class handles all input
 public class UIManager {
 	
-	static boolean isTextbased = true;
+	static boolean isTextbased = false;
 	
 	// Singleton instance
 	private static UIManager instance;
@@ -131,6 +133,14 @@ public class UIManager {
 	
 	private boolean startGuiNavigate() {
 		net.Gui.Navigate.runNavigate(null);
+		return true;
+	}
+	private boolean startTreadView() {
+		net.Gui.ThreadOverview.runThreadOverview(null);
+		return true;
+	}
+	private boolean startShowThread(String ThreadID) {
+		net.Gui.ShowThread.runShowThread(ThreadID);
 		return true;
 	}
 	
