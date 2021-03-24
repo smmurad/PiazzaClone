@@ -78,7 +78,7 @@ public boolean AddReplyPost(String postID, String postText) {
 			Post newPost = new Post(postTitle, postText, PostType.answer, sqlDate);
 			
 			// Fill it up
-			newPost.createdBy = UserHandler.getInstance().GetUniqueID();
+			newPost.createdBy = UserHandler.getInstance().uniqueId;
 			int replyIDint = getUniqueID();
 			newPost.postID = replyIDint;
 			newPost.colorID = PostManager.GetColor(newPost.postType);
