@@ -71,7 +71,6 @@ public class Driver {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 		return _result;
 	}
 	
@@ -162,6 +161,76 @@ public class Driver {
 	        close();
 	    }
 		return null;
+	}
+	
+	public int getUniqueID(String email) {
+		try {
+			String tableName = "";
+			tableName = getTableName(TableEnum.users);
+			int uniqueUserId = -1;
+			
+			String sqlQuery = "SELECT userID FROM " + tableName + "WHERE email = \"" + email + "\";";
+			System.out.println("SQL query: " + sqlQuery);
+
+			_result = queryDatabase(sqlQuery);
+			int id = -1;
+			while(_result.next())
+			{
+				id = _result.getInt(1);
+			}
+			uniqueUserId = id;
+			
+			return uniqueUserId;
+		}
+		catch (Exception e) {
+			System.err.println("[DRIVER]: " + e.getStackTrace());
+		}finally {
+			close();
+		}
+		return -1;
+	}
+	
+	public int updateStatistics() {
+		try {
+		String tableName = "";
+		tableName = getTableName(TableEnum.users);
+		
+		String sqlQuery = "UPDATE " + tableName + "SET postsCreated = postsCreated + 1 WHERE userID = " + UserHandler.getInstance().uniqueId + ";";
+		System.out.println("SQL query: " + sqlQuery);
+		
+		updateDatabase(sqlQuery);
+		
+		return 0;
+		}
+		
+		catch (Exception e) {
+			System.err.println("[DRIVER]: " + e.getStackTrace());
+		}
+		finally {
+			close();
+		}
+		return 0;
+	}
+	
+	public ResultSet getStats() {
+		try {
+			String tableName = "";
+			tableName = getTableName(TableEnum.users);
+			
+			//String sqlQuery = "SELECT email AS \"username\", postViewed AS \"Number of posts read\", postsCreated AS \"Number of postsCreated \" FROM " + tableName + " GROUP BY " + UserHandler.getInstance().uniqueId +" ORDER BY postsViewed DESC" + "\";";
+			String sqlQuery = "SELECT email , postViewed, postsCreated FROM " + tableName + ";";
+			System.out.println("SQL query: " + sqlQuery);
+			ResultSet result = queryDatabase(sqlQuery);
+			
+			return result;
+		}
+		catch (Exception e) {
+			System.err.println("[DRIVER]: " + e.getLocalizedMessage());
+			return null;
+		}
+		finally {
+			//close();
+		}
 	}
 
     private void close() {

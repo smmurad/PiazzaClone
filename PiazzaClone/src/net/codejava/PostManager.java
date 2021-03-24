@@ -39,9 +39,10 @@ public class PostManager {
 			Post newPost = new Post(postTitle, postText, PostType.question, sqlDate);
 			
 			// Fill it up
-			newPost.createdBy = UserHandler.getInstance().GetUniqueID();		
+			newPost.createdBy = UserHandler.getInstance().uniqueId;
 			newPost.postID = getUniqueID();
 			newPost.colorID = PostManager.GetColor(newPost.postType);
+			UpdateStatistics();
 			
 			// If folder does not exist, create new. 
 			if(!DatabaseAPI.getInstance().FolderExist(folderName))
@@ -90,5 +91,10 @@ public class PostManager {
 	public List<Integer> SearchForPost(String searchText) {
 		
 		return DatabaseAPI.getInstance().getAllElementsContainingSearchword(TableEnum.post, "postID", "text", searchText);
+	}
+	
+	public int UpdateStatistics() {
+		DatabaseAPI.getInstance().updateStatistics();
+		return 0;
 	}
 }

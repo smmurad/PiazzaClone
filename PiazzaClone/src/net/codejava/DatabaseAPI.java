@@ -1,9 +1,11 @@
 package net.codejava;
 
+import java.sql.ResultSet;
 import java.util.*;
 
 import net.DBResults.Post;
 import net.DBResults.TableEnum;
+import net.DBResults.UserStats;
 
 public class DatabaseAPI {
 	
@@ -67,6 +69,48 @@ public class DatabaseAPI {
 	public List<Integer> getAllElementsContainingSearchword(TableEnum post, String ColumnName, String searchText,  String specificSearchword) {
 		// TODO Auto-generated method stub
 		return Driver.getInstance().getAllElementsContainingSearchword(post, ColumnName, searchText, specificSearchword);
+	}
+	public int getUniqueID(String email) {
+		return Driver.getInstance().getUniqueID(email);
+	}
+	
+	public int updateStatistics() {
+		return Driver.getInstance().updateStatistics();
+	}
+	public List<UserStats> getStats() {
+		try {
+			// Get list of result
+			ResultSet resultSets = Driver.getInstance().getStats();
+			
+			// Convert result into stats objects
+			List<UserStats> statsDatum = new ArrayList<UserStats>();
+
+			
+			String username;
+			int postsViewed;
+			int postsCreated;
+			if(resultSets == null) {
+				System.out.println("result set is null");
+				return null;
+			}
+
+			while(resultSets.next())
+			{
+				username = resultSets.getString(1);
+				postsViewed = resultSets.getInt(2);
+				postsCreated = resultSets.getInt(3);
+
+				
+				System.out.println("Username: " + username + "pview: " + postsViewed + "postsCreated: " + postsCreated);
+				
+				UserStats newStat = new UserStats(username, postsViewed, postsCreated);
+				statsDatum.add(newStat);
+			}
+			return statsDatum;
+		}catch (Exception e) {
+			System.err.println("[DatabaseAPI]: " + e.getCause());
+			return null;
+		}
 	}
 	
 }

@@ -1,12 +1,18 @@
 package net.codejava;
 
+import net.DBResults.TableEnum;
+
 // This class is only for the current user using the system. 
 public class UserHandler {
 	
 	private boolean isLoggedIn = false;
+	
+	public int uniqueId = 0;
 
 	// Singleton instance
 	private static UserHandler instance;
+
+	public boolean IsInstructor = true;
 	
 	private UserHandler() {}
 	
@@ -26,6 +32,7 @@ public class UserHandler {
 		{
 			// Might want a session token
 			isLoggedIn = true;
+			int uniqueId = DatabaseAPI.getInstance().getUniqueID(userName);
 			return true;
 		}
 		else
@@ -39,9 +46,8 @@ public class UserHandler {
 		isLoggedIn = false;
 	}
 
-	public int GetUniqueID() 
+	public int GetUniqueID(String email) 
 	{
-		System.out.println("Get Unique UserID not yet implemented");
-		return 0;
+		return DatabaseAPI.getInstance().getUniqueID(email);
 	}
 }

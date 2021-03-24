@@ -2,10 +2,12 @@ package net.codejava;
 
 import java.util.List;
 
+import net.DBResults.UserStats;
+
 // This class handles all input
 public class UIManager {
 	
-	static boolean isTextbased = false;
+	static boolean isTextbased = true;
 	
 	// Singleton instance
 	private static UIManager instance;
@@ -24,9 +26,10 @@ public class UIManager {
 		
 		if(isTextbased)
 		{
-			getInstance().startTextbasedLogin();
-			getInstance().startAddPost();
-			getInstance().startSearchForPostContent();
+			//getInstance().startTextbasedLogin();
+			//getInstance().startAddPost();
+			//getInstance().startSearchForPostContent();
+			getInstance().startViewStatistics();
 		}
 		else
 		{
@@ -44,7 +47,7 @@ public class UIManager {
 			//for loop view results
 			if(ids.isEmpty())
 			{
-				System.out.println("No post containing searchword: " + searchword + " ...\n\n");
+				System.out.println("No posts containing searchword: " + searchword + " ...\n\n");
 				return;
 			}
 			System.out.println("Found "  + ids.size() + " matching rows with searchword: "  + searchword + "\n");
@@ -118,6 +121,34 @@ public class UIManager {
 	private boolean startRunSearchForWord() {
 		net.Gui.SearchForWord.runSearchForWord(null);
 		return true;
+	}
+	
+	private void startViewStatistics() {
+		if(!UserHandler.getInstance().IsInstructor)
+		{
+			System.out.println("Cannot view stats unless you are instructor");
+			return;
+		}
+		try
+		{
+			List<UserStats> datas = statsManager.getInstance().getStats();
+			if(datas.size() > 0)
+			{
+				System.out.println("USER STATS: \n\n ------------------------- \n");
+				for(UserStats stats : datas)
+				{
+					System.out.println("Username: " + stats.username + "\nPosts viewed: " + stats.postsViewed + "\nPosts created: " + stats.postsCreated + "\n");
+				}
+				
+			}
+			// Print data for loop
+			else
+				System.out.println("No statistics to show...");
+		}
+		catch(Exception e)
+		{
+            System.err.println("[UIManager] Exeption: " + e.getMessage());
+		}
 	}
 	
 }
