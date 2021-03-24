@@ -3,6 +3,7 @@ package net.codejava;
 import java.sql.*;
 import java.util.*;
 
+import net.DBResults.Post;
 import net.DBResults.TableEnum;
 
 public class Driver {
@@ -128,6 +129,8 @@ public class Driver {
 			return "tag";
 		case takingcourse:
 			return "takingcourse";
+		case thread:
+			return "thread";
 		default:
 			return "";
 		}
@@ -152,6 +155,75 @@ public class Driver {
 			while(_result.next()) {
 				int number = Integer.parseInt(_result.getString(1));
 				list.add(number);
+			}
+			
+			return list;
+			
+	    } catch (Exception e) {
+            System.err.println("[DRIVER]: " + e.getStackTrace());
+	    } finally {
+	        close();
+	    }
+		return null;
+	}
+	
+	public List<String> getAllElements(TableEnum tableNameEnum, String colName)
+	{
+		try 
+		{
+
+			String tableName = "";
+			List<String> list = new ArrayList<String>();
+			
+			tableName = getTableName(tableNameEnum);
+
+			String sqlQuery = "SELECT " + colName + " FROM " + tableName + ";";
+			System.out.println("SQL query: " + sqlQuery);
+
+			_result = queryDatabase(sqlQuery);
+			
+			//List of all IDs			
+			while(_result.next()) {
+				String value = _result.getString(1);
+				list.add(value);
+			}
+			
+			return list;
+			
+	    } catch (Exception e) {
+            System.err.println("[DRIVER]: " + e.getStackTrace());
+	    } finally {
+	        close();
+	    }
+		return null;
+	}
+	
+	public List<String> getAllElementsSorted(TableEnum tableNameEnum, String colName, String sortCol, boolean filterBool, String filterCol, String filterValue)
+	{
+		try 
+		{
+
+			String tableName = "";
+			List<String> list = new ArrayList<String>();
+			
+			tableName = getTableName(tableNameEnum);
+			String sqlQuery = "";
+			if(!filterBool) {
+				sqlQuery = "SELECT " + colName + " FROM " + tableName + " ORDER BY " + sortCol + " ASC;";
+			}
+			else {
+				sqlQuery = "SELECT " + colName + " FROM " + tableName + " WHERE " + filterCol + " = " + Post.paddWithFnut(filterValue) + " ORDER BY " + sortCol + " ASC;";
+			}
+
+			
+			System.out.println("SQL query: " + sqlQuery);
+
+			_result = queryDatabase(sqlQuery);
+			
+			//List of all IDs			
+			while(_result.next()) {
+				String value = _result.getString(1);
+				list.add(value);
 			}
 			
 			return list;

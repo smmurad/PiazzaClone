@@ -2,6 +2,8 @@ package net.codejava;
 
 import java.util.List;
 
+import net.DBResults.TableEnum;
+
 // This class handles all input
 public class UIManager {
 	
@@ -30,11 +32,7 @@ public class UIManager {
 		}
 		else
 		{
-			//getInstance().startGuiLogin();
-			//getInstance().startGuiAddPost();
-			//getInstance().startRunSearchForWord();
-			//getInstance().startReplyToPost();
-			getInstance().startGuiNavigate();
+			getInstance().startGuiNavigate();	
 		}
 		System.out.println("-----------Program ended-------------");
 	}
@@ -129,6 +127,14 @@ public class UIManager {
 	
 	private boolean startGuiNavigate() {
 		net.Gui.Navigate.runNavigate(null);
+		return true;
+	}
+	private boolean startTreadView() {
+		net.Gui.ThreadOverview.runThreadOverview(null);
+		return true;
+	}
+	private boolean startShowThread(String ThreadID) {
+		net.Gui.ShowThread.runShowThread(ThreadID);
 		return true;
 	}
 	

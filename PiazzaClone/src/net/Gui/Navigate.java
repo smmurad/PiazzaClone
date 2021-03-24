@@ -64,6 +64,10 @@ public class Navigate extends JFrame {
 		btnSearch.setBounds(125, 168, 157, 29);
 		contentPane.add(btnSearch);
 		
+		JButton btnThreads = new JButton("View threads");
+		btnThreads.setBounds(143, 205, 117, 29);
+		contentPane.add(btnThreads);
+		
 		
 		
 		btnLogin.addActionListener(new ActionListener() {
@@ -116,6 +120,20 @@ public class Navigate extends JFrame {
 				try
 				{
 					net.Gui.SearchForWord.runSearchForWord(null);
+				}
+				catch(Exception e)
+				{
+		            System.err.println("[UIManager] Exeption: " + e.getMessage());
+				}
+			}
+		});
+		
+		btnThreads.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				try
+				{
+					net.Gui.ThreadOverview.runThreadOverview(null);
 				}
 				catch(Exception e)
 				{

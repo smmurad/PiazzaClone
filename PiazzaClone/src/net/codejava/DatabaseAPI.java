@@ -77,4 +77,18 @@ public class DatabaseAPI {
 		return Driver.getInstance().getAllElementsContainingSearchword(post, ColumnName, searchText, specificSearchword);
 	}
 	
+	public List<String> getAllThreads(){
+		return Driver.getInstance().getAllElements(TableEnum.thread, "threadID");
+	}
+	
+	public String getPostFromThread(String ThreadID) {
+		String text ="";
+		List<String> textList = Driver.getInstance().getAllElementsSorted(TableEnum.post, "text", "postDate", true, "threadID", ThreadID);
+		for (int i=0; i<textList.size(); i++) {
+			text += textList.get(i);
+			text += "\n\n --------------------------- \n\n";
+		}
+		return text;
+	}
+	
 }
