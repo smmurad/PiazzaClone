@@ -81,6 +81,10 @@ public class AddPost extends JFrame {
 		btnExcecutePost.setBounds(241, 207, 117, 29);
 		contentPane.add(btnExcecutePost);
 		
+		JButton btnMenu = new JButton("Back to menu");
+		btnMenu.setBounds(241, 237, 117, 29);
+		contentPane.add(btnMenu);
+		
 		
 		
 		btnExcecutePost.addActionListener(new ActionListener() {
@@ -101,9 +105,22 @@ public class AddPost extends JFrame {
 				{
 		            System.err.println("[UIManager] Exeption: " + e.getMessage());
 				}
-				
-				
 			}
 		}); 
+		
+		
+		btnMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				try
+				{
+					net.Gui.Navigate.runNavigate(null);
+				}
+				catch(Exception e)
+				{
+		            System.err.println("[UIManager] Input Exception");
+				}
+			}
+		});
 	}
 }

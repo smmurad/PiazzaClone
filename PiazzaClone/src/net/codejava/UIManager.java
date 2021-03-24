@@ -36,6 +36,7 @@ public class UIManager {
 			//getInstance().startGuiLogin();
 			//getInstance().startGuiAddPost();
 			getInstance().startRunSearchForWord();
+			getInstance().startGuiNavigate();
 		}
 		System.out.println("-----------Program ended-------------");
 	}
@@ -122,6 +123,19 @@ public class UIManager {
 		net.Gui.SearchForWord.runSearchForWord(null);
 		return true;
 	}
+	
+	private boolean startReplyToPost() {
+		net.Gui.reply.runReply(null);
+		return true;
+	}
+	
+	private boolean startGuiNavigate() {
+		net.Gui.Navigate.runNavigate(null);
+		return true;
+	}
+	
+	
+	
 	
 	private void startViewStatistics() {
 		if(!UserHandler.getInstance().IsInstructor)

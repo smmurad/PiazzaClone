@@ -66,8 +66,12 @@ public class SearchForWord extends JFrame {
 	
 		
 		JButton btnExcecutePost = new JButton("Search");
-		btnExcecutePost.setBounds(241, 207, 117, 29);
+		btnExcecutePost.setBounds(241, 180, 117, 29);
 		contentPane.add(btnExcecutePost);
+		
+		JButton btnMenu = new JButton("Back to menu");
+		btnMenu.setBounds(241, 221, 117, 29);
+		contentPane.add(btnMenu);
 		
 		
 		
@@ -95,9 +99,22 @@ public class SearchForWord extends JFrame {
 				{
 		            System.err.println("[UIManager] Exeption: " + e.getMessage());
 				}
-				
-				
 			}
 		}); 
+		
+		
+		btnMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				try
+				{
+					net.Gui.Navigate.runNavigate(null);
+				}
+				catch(Exception e)
+				{
+		            System.err.println("[UIManager] Input Exception");
+				}
+			}
+		});
 	}
 }
