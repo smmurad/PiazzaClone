@@ -9,7 +9,6 @@ import net.DBResults.PostType;
 import net.DBResults.TableEnum;
 
 
-
 // This class handles the creation, viewing, changing and deletion of posts
 public class PostManager {
 
@@ -101,8 +100,7 @@ public boolean AddReplyPost(String postID, String postText) {
 		}
 		
 	}
-	
-	// TODO Should be changed to something that actually checks the db
+
 	private static int getUniqueID() {
 		return ThreadLocalRandom.current().nextInt(0, 1000000000);
 		
