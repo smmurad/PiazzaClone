@@ -68,6 +68,10 @@ public class Navigate extends JFrame {
 		btnThreads.setBounds(143, 205, 117, 29);
 		contentPane.add(btnThreads);
 		
+		JButton btnStat = new JButton("View to statistics");
+		btnStat.setBounds(143, 237, 117, 29);
+		contentPane.add(btnStat);
+		
 		
 		
 		btnLogin.addActionListener(new ActionListener() {
@@ -134,6 +138,20 @@ public class Navigate extends JFrame {
 				try
 				{
 					net.Gui.ThreadOverview.runThreadOverview(null);
+				}
+				catch(Exception e)
+				{
+		            System.err.println("[UIManager] Exeption: " + e.getMessage());
+				}
+			}
+		});
+		
+		btnStat.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				try
+				{
+					net.Gui.Statistics.runStatistics(null);
 				}
 				catch(Exception e)
 				{

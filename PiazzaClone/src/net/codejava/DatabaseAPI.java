@@ -36,6 +36,7 @@ public class DatabaseAPI {
 	}
 
 	public void CreateFolder(String folderName) {
+		
 		System.out.println("Creating folder Not yet implemented"); // Endre her sander
 	}
 
