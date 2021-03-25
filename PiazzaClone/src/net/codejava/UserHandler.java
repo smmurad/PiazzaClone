@@ -32,7 +32,7 @@ public class UserHandler {
 		{
 			// Might want a session token
 			isLoggedIn = true;
-			int uniqueId = DatabaseAPI.getInstance().getUniqueID(userName);
+			uniqueId = DatabaseAPI.getInstance().getUniqueID(userName);
 			return true;
 		}
 		else

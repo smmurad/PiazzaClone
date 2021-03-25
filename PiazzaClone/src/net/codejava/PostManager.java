@@ -40,6 +40,7 @@ public class PostManager {
 			
 			// Fill it up
 			newPost.createdBy = UserHandler.getInstance().uniqueId;
+			System.out.println("UserID: " + UserHandler.getInstance().uniqueId);
 			newPost.postID = getUniqueID();
 			newPost.colorID = PostManager.GetColor(newPost.postType);
 			UpdateStatistics();

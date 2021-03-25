@@ -242,7 +242,7 @@ public class Driver {
 			tableName = getTableName(TableEnum.users);
 			int uniqueUserId = -1;
 			
-			String sqlQuery = "SELECT userID FROM " + tableName + "WHERE email = \"" + email + "\";";
+			String sqlQuery = "SELECT userID FROM " + tableName + " WHERE email = " + Post.paddWithFnut(email) + ";";
 			System.out.println("SQL query: " + sqlQuery);
 
 			_result = queryDatabase(sqlQuery);
@@ -268,7 +268,7 @@ public class Driver {
 		String tableName = "";
 		tableName = getTableName(TableEnum.users);
 		
-		String sqlQuery = "UPDATE " + tableName + "SET postsCreated = postsCreated + 1 WHERE userID = " + UserHandler.getInstance().uniqueId + ";";
+		String sqlQuery = "UPDATE " + tableName + " SET postsCreated = postsCreated + 1 WHERE userID = " + UserHandler.getInstance().uniqueId + ";";
 		System.out.println("SQL query: " + sqlQuery);
 		
 		updateDatabase(sqlQuery);
