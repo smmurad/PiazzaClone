@@ -30,7 +30,6 @@ public class UserHandler {
 	{
 		if(DatabaseAPI.getInstance().VerifyPassword(userName, Password))
 		{
-			// Might want a session token
 			isLoggedIn = true;
 			uniqueId = DatabaseAPI.getInstance().getUniqueID(userName);
 			return true;

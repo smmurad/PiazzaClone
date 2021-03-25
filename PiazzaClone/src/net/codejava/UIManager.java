@@ -28,16 +28,16 @@ public class UIManager {
 		
 		if(isTextbased)
 		{
-			//getInstance().startTextbasedLogin();
-			//getInstance().startAddPost();
-			//getInstance().startSearchForPostContent();
+			getInstance().startTextbasedLogin();
+			getInstance().startAddPost();
+			getInstance().startSearchForPostContent();
 			getInstance().startViewStatistics();
 		}
 		else
 		{
 			//getInstance().startGuiLogin();
 			//getInstance().startGuiAddPost();
-			getInstance().startRunSearchForWord();
+			//getInstance().startRunSearchForWord();
 			getInstance().startGuiNavigate();
 		}
 		System.out.println("-----------Program ended-------------");

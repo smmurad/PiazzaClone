@@ -28,11 +28,6 @@ public class Post {
 	public int timesViewed = 0;
 	public Timestamp dateTime;
 	
-	public void Save()
-	{
-		
-	}
-	
 	public static String paddWithFnut(String textToPadd)
 	{
 		return paddWithChar(textToPadd, "\"");
@@ -65,6 +60,4 @@ public class Post {
 		System.out.println("GetThreadID not yet implemented");
 		return 0;
 	}
-	
-	
 }
