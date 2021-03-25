@@ -305,6 +305,14 @@ public class Driver {
 			//close();
 		}
 	}
+	
+	public void createNewThread(String threadID, String folderID) {
+		String values = "";
+		values += threadID; // threadID int
+		values += ",";
+		values += folderID; //folderID int
+		InsertIntoTable(TableEnum.thread,values);
+	}
 
     private void close() {
         try {

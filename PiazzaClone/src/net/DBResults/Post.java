@@ -1,6 +1,7 @@
 package net.DBResults;
 
 import java.sql.Timestamp;
+import java.util.concurrent.ThreadLocalRandom;
 
 // This is the dataclass for a Post
 public class Post {
@@ -62,8 +63,7 @@ public class Post {
 	}
 
 	public int getThreadID() {
-		System.out.println("GetThreadID not yet implemented");
-		return 0;
+		return ThreadLocalRandom.current().nextInt(0, 1000000000);
 	}
 	
 	

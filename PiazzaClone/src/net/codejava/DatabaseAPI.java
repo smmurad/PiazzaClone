@@ -48,7 +48,7 @@ public class DatabaseAPI {
 		Driver.getInstance().InsertIntoTable(TableEnum.folder, values);
 	}
 
-	public void CreateNewPost(Post newPost) {
+	public void CreateNewPost(Post newPost, String threadID, String folderID) {
 		
 		String values = "";
 		values += newPost.postID; // postID int
@@ -63,7 +63,16 @@ public class DatabaseAPI {
 		values += ",";
 		values += Post.paddWithFnut(newPost.postTypeString()); // posttype String
 		values += ",";
-		values += newPost.getThreadID(); // threadID int 
+		if (threadID == "newThread") 
+		{
+			String newThreadID = Integer.toString(ThreadLocalRandom.current().nextInt(0, 1000000000));
+			values += newThreadID;
+			Driver.getInstance().createNewThread(newThreadID, folderID); // threadID int 
+		} 
+		else 
+		{
+			values += threadID;
+		}
 		values += ",";
 		values += newPost.tagID; // tagID int 
 		values += ",";

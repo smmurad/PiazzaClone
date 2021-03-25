@@ -53,7 +53,8 @@ public class PostManager {
 			}
 			
 			// Try to add it to the Database
-			DatabaseAPI.getInstance().CreateNewPost(newPost);
+			String folderID = Driver.getInstance().getSingleColElement(TableEnum.folder, "folderID", "name", folderName);
+			DatabaseAPI.getInstance().CreateNewPost(newPost, "newThread", folderID);
 			
 			return true;
 		}
@@ -87,8 +88,9 @@ public boolean AddReplyPost(String postID, String postText) {
 			
 			// Try to add it to the Database
 			System.out.println(postID + " \t " + replyID);
-			
-			DatabaseAPI.getInstance().CreateNewPost(newPost);
+			String threadID = Driver.getInstance().getSingleColElement(TableEnum.post, "threadID", "postID", postID);
+			String folderID = Driver.getInstance().getSingleColElement(TableEnum.thread, "folderID", "threadID", threadID);
+			DatabaseAPI.getInstance().CreateNewPost(newPost, threadID, folderID);
 			DatabaseAPI.getInstance().CreateRelationBetweeenPosts(postID, replyID);
 			return true;
 		}
