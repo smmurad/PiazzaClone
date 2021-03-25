@@ -2,6 +2,7 @@ package net.codejava;
 
 import java.sql.ResultSet;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 import net.DBResults.Post;
 import net.DBResults.TableEnum;
@@ -36,8 +37,15 @@ public class DatabaseAPI {
 	}
 
 	public void CreateFolder(String folderName) {
-		
-		System.out.println("Creating folder Not yet implemented"); // Endre her sander
+		String values = "";
+		values += Integer.toString(ThreadLocalRandom.current().nextInt(0, 1000000000)); //Creates random FolderID with very low chance of duplicate
+		values += ",";
+		values += Post.paddWithFnut(folderName);
+		values += ",";
+		values += "null"; //parentFolder, assumed to be null
+		values += ",";
+		values += "1"; //Assumes course to be 1
+		Driver.getInstance().InsertIntoTable(TableEnum.folder, values);
 	}
 
 	public void CreateNewPost(Post newPost) {
