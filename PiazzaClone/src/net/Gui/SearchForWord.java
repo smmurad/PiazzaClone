@@ -84,15 +84,20 @@ public class SearchForWord extends JFrame {
 					
 					List<Integer> ids = PostManager.getInstance().SearchForPost(searchWord);
 					//for loop view results
+					String displaySting="";
 					if(ids.isEmpty())
 					{
-						System.out.println("No post containing searchword: " + searchWord + " ...\n\n");
-						return;
+						
+						displaySting = "No post containing searchword: " + searchWord + " ...\n\n";
 					}
-					System.out.println("Found "  + ids.size() + " matching rows with searchword: "  + searchWord + "\n");
-					for (int id:ids) {
-						System.out.println("postID: " + id);
+					else {
+						displaySting ="Found "  + ids.size() + " matching rows with searchword: "  + searchWord + "\n";
+						for (int id:ids) {
+							displaySting += "postID: " + id +"\n";
+						}
 					}
+					
+					TextField.setText(displaySting);
 
 				}
 				catch(Exception e)
